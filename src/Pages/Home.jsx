@@ -1,11 +1,31 @@
-import React from "react";
+import { React, useState } from "react";
 import bg from "../assets/verte-1.svg";
 import card from "../assets/gumball-card.png";
 import titre from "../assets/logo-lv.svg";
 import n from "../assets/n-films.png";
+import jojo from "../assets/jojo.png";
+import cage from "../assets/cage.png";
+import saul from "../assets/saul.png";
+import brba from "../assets/brba.png";
+import toxique from "../assets/toxique.png";
 import { FaPlay } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
+
 const Home = () => {
+  const [sliderRef, instanceRef] = useKeenSlider({
+    slides: {
+      perView: 5,
+      spacing: 10,
+    },
+    created() {
+      setLoaded(true);
+    },
+  });
+
+  const [loaded, setLoaded] = useState(false);
+
   return (
     <div
       className="relative flex items-center bg-cover bg-center h-screen  "
@@ -19,7 +39,7 @@ const Home = () => {
         <img className="  w-92 ml-12 h-auto" src={titre} alt="title" />
 
         {/*Ecriture en dessous du titre*/}
-        <div className="  absolute  ml-26 text-xl text-gray-50 ">
+        <div className="  absolute  ml-22 text-xl text-gray-50 ">
           <div className="hidden">
             <span className="block">
               Lorqu'il découvre qu'un condammé à mort possède de mystérieux
@@ -45,20 +65,66 @@ const Home = () => {
         </div>
         {/*dessous des boutons*/}
 
-        <div className="flex items-center  ml-26  space-y-5 text-gray-50">
+        <div className="flex items-center  ml-22  space-y-5 text-gray-50">
           <div className="grid grid-cols-1">
-            <span className="text-xl font-semibold mb-3">
+            <span className="text-2xl font-semibold mb-3">
               Reprendre avec le profil User1
             </span>
+            {loaded && instanceRef.current && (
+              <button
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white p-2"
+                onClick={() => instanceRef.current?.prev()}
+              >
+                ⬅️
+              </button>
+            )}
 
-            <div className=" grid grid-cols-7 space-x-4">
-              <img className="" src={card} alt="gumball" />
-              <img className="" src={card} alt="gumball" />
-              <img className="" src={card} alt="gumball" />
-              <img className="" src={card} alt="gumball" />
-              <img className="" src={card} alt="gumball" />
-              <img className="" src={card} alt="gumball" />
-              <img className="" src={card} alt="gumball" />
+            <div ref={sliderRef} className=" keen-slider     ">
+              <img
+                className="rounded-md  keen-slider__slide number-slide1 "
+                src={toxique}
+                alt="gumball"
+              />
+              <img
+                className="rounded-md  keen-slider__slide number-slide2"
+                src={cage}
+                alt="gumball"
+              />
+              <img
+                className="rounded-md  keen-slider__slide number-slide3"
+                src={brba}
+                alt="gumball"
+              />
+              <img
+                className="rounded-md  keen-slider__slide number-slide4 "
+                src={jojo}
+                alt="gumball"
+              />
+              <img
+                className="rounded-md keen-slider__slide  number-slide5 "
+                src={saul}
+                alt="gumball"
+              />
+              <img
+                className="rounded-md keen-slider__slide number-slide6 "
+                src={brba}
+                alt="gumball"
+              />
+              <img
+                className="rounded-md  keen-slider__slide number-slide "
+                src={jojo}
+                alt="gumball"
+              />
+
+              {/* Flèche droite */}
+              {loaded && instanceRef.current && (
+                <button
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white p-2"
+                  onClick={() => instanceRef.current?.next()}
+                >
+                  ➡️
+                </button>
+              )}
             </div>
           </div>
         </div>
