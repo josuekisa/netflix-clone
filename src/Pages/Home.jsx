@@ -12,7 +12,7 @@ import { FaPlay } from "react-icons/fa";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-
+import { SlArrowLeft } from "react-icons/sl";
 const Home = () => {
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
@@ -70,16 +70,14 @@ const Home = () => {
             <span className="text-2xl font-semibold mb-3">
               Reprendre avec le profil User1
             </span>
-            {loaded && instanceRef.current && (
-              <button
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white p-2"
-                onClick={() => instanceRef.current?.prev()}
-              >
-                ⬅️
-              </button>
-            )}
 
             <div ref={sliderRef} className=" keen-slider     ">
+              {loaded && instanceRef.current && (
+                <SlArrowLeft
+                  className="absolute w-32 left-0 top-1/2 -translate-y-1/2 z-60  text-red-600 p-2"
+                  onClick={() => instanceRef.current?.prev()}
+                />
+              )}
               <img
                 className="rounded-md  keen-slider__slide number-slide1 "
                 src={toxique}
@@ -128,6 +126,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {/** afficeh films */}
       </div>
     </div>
   );
